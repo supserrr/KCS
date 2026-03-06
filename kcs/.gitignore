@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Firebase / Google config (contains API keys - run flutterfire configure)
+# firebase_options.dart is committed with placeholders; overwritten by flutterfire configure
+/android/app/google-services.json
+ios/Runner/GoogleService-Info.plist

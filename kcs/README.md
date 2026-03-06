@@ -6,16 +6,14 @@ Flutter app for browsing services and places in Kigali: listings, map view, sear
 
 1. Install [Firebase CLI](https://firebase.google.com/docs/cli).
 2. Enable Firebase Auth (Email/Password, optionally Google Sign-In) and Cloud Firestore in the [Firebase Console](https://console.firebase.google.com).
-3. Run:
+3. From the `kcs` directory, run:
 
    ```bash
    dart pub global activate flutterfire_cli
    flutterfire configure
    ```
 
-   This generates `lib/firebase_options.dart` for your project.
-
-4. Ensure `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) are present and correctly configured.
+   This generates `lib/firebase_options.dart` and downloads `google-services.json` (Android) and `GoogleService-Info.plist` (iOS). Do not commit these files if they contain your project's API keys.
 
 ## Firestore collections
 
