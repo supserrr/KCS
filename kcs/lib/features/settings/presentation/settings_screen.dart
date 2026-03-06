@@ -65,14 +65,25 @@ class SettingsScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 8),
           Card(
-            child: SwitchListTile(
-              title: const Text('Location-based notifications'),
-              subtitle: const Text('Get notified about nearby places'),
-              value: notificationsEnabled,
-              onChanged: (v) =>
-                  ref.read(notificationPreferencesProvider.notifier).setEnabled(v),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            ),
+            child: notificationsEnabled == null
+                ? const ListTile(
+                    title: Text('Location-based notifications'),
+                    subtitle: Text('Loading...'),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    trailing: SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  )
+                : SwitchListTile(
+                    title: const Text('Location-based notifications'),
+                    subtitle: const Text('Get notified about nearby places'),
+                    value: notificationsEnabled,
+                    onChanged: (v) =>
+                        ref.read(notificationPreferencesProvider.notifier).setEnabled(v),
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                  ),
           ),
           const SizedBox(height: 32),
           Padding(

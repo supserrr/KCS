@@ -58,7 +58,7 @@ class Listing {
       'longitude': longitude,
       'createdBy': createdBy,
       'updatedAt': FieldValue.serverTimestamp(),
-      if (imageUrl != null) 'imageUrl': imageUrl!,
+      if (imageUrl != null) 'imageUrl': imageUrl,
     };
   }
 

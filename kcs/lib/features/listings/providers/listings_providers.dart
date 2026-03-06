@@ -15,7 +15,9 @@ final userLocationProvider = FutureProvider<Position?>((ref) async {
       return null;
     }
   }
-  return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.medium);
+  return Geolocator.getCurrentPosition(
+    locationSettings: LocationSettings(accuracy: LocationAccuracy.medium),
+  );
 });
 
 final firestoreServiceProvider = Provider<FirestoreService>((ref) => FirestoreService());
@@ -46,7 +48,7 @@ final filteredListingsProvider = Provider<List<Listing>>((ref) {
       return filtered;
     },
     loading: () => [],
-    error: (_, _) => [],
+    error: (error, stackTrace) => [],
   );
 });
 

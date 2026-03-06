@@ -26,7 +26,7 @@ class ListingCard extends StatelessWidget {
     final theme = Theme.of(context);
     final displayRating = rating ?? 0.0;
     final count = reviewCount ?? 0;
-    final hasImage = listing.imageUrl != null && listing.imageUrl!.isNotEmpty;
+    final hasImage = listing.imageUrl?.isNotEmpty ?? false;
 
     return Material(
       color: AppColors.cardBackground,
@@ -64,7 +64,7 @@ class ListingCard extends StatelessWidget {
                         ? Image.network(
                             listing.imageUrl!,
                             fit: BoxFit.cover,
-                            errorBuilder: (_, __, ___) => _buildPlaceholder(theme),
+                            errorBuilder: (context, error, stackTrace) => _buildPlaceholder(theme),
                           )
                         : _buildPlaceholder(theme),
                   ),

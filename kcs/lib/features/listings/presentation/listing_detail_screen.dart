@@ -31,15 +31,15 @@ class ListingDetailScreen extends ConsumerWidget {
           ? 0.0
           : reviews.map((r) => r.rating).reduce((a, b) => a + b) / reviews.length,
       loading: () => 0.0,
-      error: (_, _) => 0.0,
+      error: (error, stackTrace) => 0.0,
     );
     final reviewCount = reviewsAsync.when(
       data: (reviews) => reviews.length,
       loading: () => 0,
-      error: (_, _) => 0,
+      error: (error, stackTrace) => 0,
     );
     final theme = Theme.of(context);
-    final hasImage = listing.imageUrl != null && listing.imageUrl!.isNotEmpty;
+    final hasImage = listing.imageUrl?.isNotEmpty ?? false;
 
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
@@ -69,7 +69,7 @@ class ListingDetailScreen extends ConsumerWidget {
                       ? Image.network(
                           listing.imageUrl!,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, __, ___) => const _ImagePlaceholder(),
+                          errorBuilder: (context, error, stackTrace) => const _ImagePlaceholder(),
                         )
                       : const _ImagePlaceholder(),
                   Container(

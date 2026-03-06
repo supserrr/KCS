@@ -4,12 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 const _notificationPrefKey = 'location_notifications_enabled';
 
 final notificationPreferencesProvider =
-    StateNotifierProvider<NotificationPreferencesNotifier, bool>((ref) {
+    StateNotifierProvider<NotificationPreferencesNotifier, bool?>((ref) {
   return NotificationPreferencesNotifier();
 });
 
-class NotificationPreferencesNotifier extends StateNotifier<bool> {
-  NotificationPreferencesNotifier() : super(true) {
+class NotificationPreferencesNotifier extends StateNotifier<bool?> {
+  NotificationPreferencesNotifier() : super(null) {
     _load();
   }
 
