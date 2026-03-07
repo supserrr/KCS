@@ -42,7 +42,7 @@ class MyListingsScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'No listings yet',
+                      'Tap the + button below to add your first listing',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: AppColors.textSecondary,
                       ),
