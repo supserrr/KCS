@@ -14,12 +14,25 @@ class ListingDetailScreen extends ConsumerWidget {
 
   const ListingDetailScreen({super.key, required this.listing});
 
-  Future<void> _openDirections(Listing listing) async {
-    final url = Uri.parse(
+  Future<void> _openDirections(BuildContext context, Listing listing) async {
+    final mapsUrl = Uri.parse(
       'https://www.google.com/maps/dir/?api=1&destination=${listing.latitude},${listing.longitude}',
     );
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url, mode: LaunchMode.externalApplication);
+    final geoUrl = Uri.parse(
+      'geo:${listing.latitude},${listing.longitude}',
+    );
+    try {
+      await launchUrl(mapsUrl, mode: LaunchMode.externalApplication);
+    } catch (_) {
+      try {
+        await launchUrl(geoUrl, mode: LaunchMode.externalApplication);
+      } catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Could not open maps: $e')),
+          );
+        }
+      }
     }
   }
 
@@ -58,7 +71,7 @@ class ListingDetailScreen extends ConsumerWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.directions_rounded),
-                onPressed: () => _openDirections(listing),
+                onPressed: () => _openDirections(context, listing),
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
@@ -276,7 +289,7 @@ class ListingDetailScreen extends ConsumerWidget {
                         children: [
                           Expanded(
                             child: FilledButton.icon(
-                              onPressed: () => _openDirections(listing),
+                              onPressed: () => _openDirections(context, listing),
                               icon: const Icon(Icons.directions_rounded, size: 20),
                               label: const Text('Get Directions'),
                               style: FilledButton.styleFrom(
