@@ -1,25 +1,21 @@
-import 'dart:math';
-double _toRadians(double degrees) => degrees * pi / 180;
+import 'package:latlong2/latlong.dart';
 
-double haversineDistance(
-  double lat1,
-  double lon1,
-  double lat2,
-  double lon2,
-) {
-  const earthRadius = 6371.0;
-  final dLat = _toRadians(lat2 - lat1);
-  final dLon = _toRadians(lon2 - lon1);
-  final a = sin(dLat / 2) * sin(dLat / 2) +
-      cos(_toRadians(lat1)) *
-          cos(_toRadians(lat2)) *
-          sin(dLon / 2) *
-          sin(dLon / 2);
-  final c = 2 * atan2(sqrt(a), sqrt(1 - a));
-  return earthRadius * c;
+final _distance = Distance(roundResult: false);
+
+// distance via latlong2 (Vincenty) - returns km
+double distanceInKm(double lat1, double lon1, double lat2, double lon2) {
+  return _distance.as(
+    LengthUnit.Kilometer,
+    LatLng(lat1, lon1),
+    LatLng(lat2, lon2),
+  );
 }
 
 String formatDistance(double km) {
+  // under 1m just show < 1 m; meters for short, km for longer
+  if (km < 0.001) {
+    return '< 1 m';
+  }
   if (km < 1) {
     return '${(km * 1000).round()} m';
   }

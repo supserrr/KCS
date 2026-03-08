@@ -127,11 +127,11 @@ class _ListingList extends ConsumerWidget {
     final sorted = [...listings];
     if (position != null) {
       sorted.sort((a, b) {
-        final distA = haversineDistance(
+        final distA = distanceInKm(
           position.latitude, position.longitude,
           a.latitude, a.longitude,
         );
-        final distB = haversineDistance(
+        final distB = distanceInKm(
           position.latitude, position.longitude,
           b.latitude, b.longitude,
         );
@@ -144,7 +144,7 @@ class _ListingList extends ConsumerWidget {
       itemBuilder: (context, index) {
         final listing = sorted[index];
         final distanceKm = position != null && listing.latitude != 0 && listing.longitude != 0
-            ? haversineDistance(
+            ? distanceInKm(
                 position.latitude, position.longitude,
                 listing.latitude, listing.longitude,
               )

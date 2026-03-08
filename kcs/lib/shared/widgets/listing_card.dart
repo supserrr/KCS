@@ -29,10 +29,9 @@ class ListingCard extends StatelessWidget {
     final hasImage = listing.imageUrl?.isNotEmpty ?? false;
 
     return Material(
-      color: AppColors.cardBackground,
+      color: theme.colorScheme.surfaceContainerHighest,
       borderRadius: BorderRadius.circular(16),
       elevation: 0,
-      shadowColor: Colors.black.withValues(alpha: 0.08),
       child: InkWell(
         onTap: onTap != null
             ? () {
@@ -45,7 +44,7 @@ class ListingCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: AppColors.divider.withValues(alpha: 0.6),
+              color: theme.colorScheme.outlineVariant,
               width: 1,
             ),
           ),
